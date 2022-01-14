@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { Count } from './components/count';
+import { Input } from './components/input';
+import { Result } from './components/result';
+import { CountProvider } from './context/countContext';
+import { InputContext } from './context/inputContext';
 
 function App() {
+
+  const [name, setName] = useState('')
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <InputContext.Provider value={{name, setName}}>
+        <CountProvider>
+          <Input />
+          <br />
+          <Count />
+          <hr />
+          <Result />
+        </CountProvider>
+      </InputContext.Provider>
     </div>
   );
 }
